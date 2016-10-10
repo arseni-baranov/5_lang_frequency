@@ -1,8 +1,15 @@
-import os.path, collections, re
+import os.path
+import collections
+import re
 
-def load_data(file_path):
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    data_file = current_dir + '\\' + file_path
+
+def load_data(file_name):
+
+    current_dir = os.path.abspath(__file__)
+    script_name = os.path.basename(__file__)
+
+    data_file = current_dir.replace(script_name, '') + file_name
+
     with open(data_file, "r", encoding="utf-8") as data_file:
         return data_file.read().lower()
 
