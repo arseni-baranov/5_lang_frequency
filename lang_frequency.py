@@ -1,25 +1,18 @@
-import os.path
 import collections
 import re
 
 
 def load_data(file_name):
 
-    current_dir = os.path.abspath(__file__)
-    script_name = os.path.basename(__file__)
-
-    data_file = current_dir.replace(script_name, '') + file_name
-
-    with open(data_file, "r", encoding="utf-8") as data_file:
-        return data_file.read().lower()
+    with open(file_name, "r", encoding="utf-8") as text_file:
+        return text_file.read().lower()
 
 
 def get_most_frequent_words(text_file, top_size):
-    text = re.findall(r'\w+', text_file)
-    counter = collections.Counter(text)
-    text = counter.most_common(top_size)
+    words_in_text = re.findall(r'\w+', text_file)
+    word_count = collections.Counter(words_in_text).most_common(top_size)
 
-    return text
+    return word_count
 
 if __name__ == '__main__':
 
@@ -34,4 +27,3 @@ if __name__ == '__main__':
 
         except FileNotFoundError:
             print('Данного файла не существует в директории с программой')
-
